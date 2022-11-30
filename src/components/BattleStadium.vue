@@ -30,8 +30,8 @@ export default {
 
 <template>
   <div class="stadium">
-    <PokemonFighter :player="1" />
     <PokemonFighter :player="2" />
+    <PokemonFighter :player="1" />
   </div>
 </template>
 
@@ -41,7 +41,9 @@ export default {
   height: 450px;
   background: v-bind("backgroundImg");
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   overflow: hidden;
 }
 </style>

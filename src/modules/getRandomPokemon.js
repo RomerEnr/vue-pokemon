@@ -25,7 +25,7 @@ export const getRandomPokemon = async () =>{
   const randomNumber = Math.floor(Math.random() * MAX_POKEMON ) + MIN_POKEMON
   const request = await fetch(URL + randomNumber)
   const pokemonData = await request.json()
-
+  const maxHP = pokemonData.stats.find( stat => stat.stat.name === "hp").base_stat;
   const moves = selectRandomMoves(pokemonData)
 
   const sprites = {
@@ -34,7 +34,8 @@ export const getRandomPokemon = async () =>{
   }
 
   return ({
-    life: pokemonData.base_experience,
+    life: maxHP,
+    maxHP: maxHP,
     name: pokemonData.name,
     moves,
     sprites

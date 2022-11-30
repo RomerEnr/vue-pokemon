@@ -1,18 +1,23 @@
 <script>
 export default {
   name: "PokemonLifeBar",
-  mounted() {
-
+  updated() {
+    // console.log(this.maxHp);
+    console.log(this.currentHp);
   },
   props: {
-    lifeValue: {
+    maxHp: {
+      type: Number,
+      required: true
+    },
+    currentHp: {
       type: Number,
       required: true
     }
   },
   data() {
     return {
-      life: this.lifeValue
+
     }
   },
   methods: {
@@ -20,7 +25,17 @@ export default {
   },
   computed: {
     lifePercent() {
-      return this.life.toString() + "%"
+      return this.currentHp + "%"
+    },
+
+    lifeColor() {
+      if (this.currentHp > 50) {
+        return "greenyellow"
+      } else if (this.currentHp > 25) {
+        return "orange"
+      } else {
+        return "red"
+      }
     }
   }
 }
@@ -38,14 +53,15 @@ export default {
 .container {
   width: 150px;
   height: 30px;
+  border: 3px solid wheat;
   border-radius: 10px;
-  background-color: gold;
+  background-color: black;
   overflow: hidden;
 }
 
 .bar {
   width: v-bind("lifePercent");
   height: 100%;
-  background-color: red;
+  background-color: v-bind("lifeColor");
 }
 </style>
